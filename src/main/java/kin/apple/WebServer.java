@@ -10,12 +10,23 @@ import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class WebServer extends WebSocketServer {
 	private static final Logger logger = Logger.getLogger(WebServer.class);
 
 	private List<WebSocket> sockets = new ArrayList<WebSocket>();
 
+	public class Output {
+		public Output(String type, Object payload) {
+			super();
+			this.type = type;
+			this.payload = payload;
+		}
+		public String type;
+		public Object payload;
+	}
+	
 	public WebServer(InetSocketAddress address) {
 		super(address);
 		// TODO Auto-generated constructor stub
@@ -35,8 +46,14 @@ public class WebServer extends WebSocketServer {
 
 	@Override
 	public void onMessage(WebSocket arg0, String arg1) {
-		// TODO Auto-generated method stub
-		
+		try {
+			Output output = new Gson().fromJson(arg1, Output.class);
+			if (output.type.equals("captcha")) {
+				//send back to iReserve the captcha to proceed
+			}
+		} catch (Exception e) {
+			
+		}
 	}
 
 	@Override
@@ -49,11 +66,15 @@ public class WebServer extends WebSocketServer {
 	}
 	
 	public void broadcast(String message) {
+		this.broadcast("log", message);
+	}
+	
+	public void broadcast(String type, String message) {
 		logger.info("Broadcast: " + message);
 		
 		for (WebSocket socket: this.sockets) {
 			try {
-				socket.send(message);
+				socket.send(new GsonBuilder().setPrettyPrinting().create().toJson(new Output(type, message)));
 			} catch(Exception e) {
 				
 			}

@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/backbone-min.js"></script>
+	<script src="js/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/backbone-firebase.js"></script>
+    <script src="js/handlebars-v1.3.0.js"></script>
+    <script src="js/json2.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+
+    <script src="js/jquery-ui-1.11.0/jquery-ui.js"></script>
+	<link href="js/jquery-ui-1.11.0/jquery-ui.css" rel="stylesheet">
+
+	<link href="js/jquery.tagsinput.css" rel="stylesheet">
+	<link href="js/bootstrap-3.1.1-dist//css/bootstrap.min.css" rel="stylesheet">
+
+	<link href="css/silly.css" rel="stylesheet">
+	<script src="js/backbonemodel.js"></script>
+	<script src="js/sillymodels.js"></script>
+	<script src="js/backbone-listeners.js"></script>
+
+	<script src="pagejs/group.js"></script>
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body ontouchstart="">
+	<div class="container">
+		<h3 class=header> 
+			<div class="pull-right">
+				<div class="btn-group">
+				  <button type="button" class="btn btn-sm btn-success"><span id="totalGoing"></span></button>
+				  <button type="button" class="btn btn-sm btn-default"><span id="totalUnknown"></span></button>
+				  <button type="button" class="btn btn-sm btn-danger"><span id="totalNotGoing"></span></button>
+				  <button type="button" class="btn btn-sm strong"><span id="total"></span></button>
+				</div>
+
+				<a href="#" class="btn btn-sm btn-default" id="contactButton"><span class="glyphicon glyphicon-earphone"></span></a>
+				<a href="#" class="btn btn-sm btn-default" id="addActivityButton"><span class="glyphicon glyphicon-plus"></span></a>
+			</div>
+
+			<div id="group">
+				<script class="template" type="text/x-handlebars-template">
+					<a href="wedding-index.html"><span class="glyphicon glyphicon-chevron-left"></span></a> <span id="name">{{name}}</span> 
+				</script>
+			</div>
+		</h3>
+
+		<div class="list-group header" id="activities">
+			<script class="template" type="text/x-handlebars-template">
+				<div data-target="wedding-activity.html" data-id-type="activity" data-id="{{id}}" class="link list-group-item activity full">
+					<div class="pull-right buttonGroup"> 
+						<div class="btn-group">
+						  <button type="button" class="btn btn-success">{{{ filter people status="going" }}}</button>
+						  <button type="button" class="btn btn-default">{{{ filter people status="unknown" }}}</button>
+						  <button type="button" class="btn btn-danger">{{{ filter people status="notgoing" }}}</button>
+						  <button type="button" class="btn btn-total strong">{{{ filter people status="--any--" }}}</button>
+						</div>
+						<a href="#" class="btn btn-danger removeButton"><span class="glyphicon glyphicon-remove"></span></a>
+					</div>
+					<h4> {{name}} </h4>
+					<div> {{description}} </div>
+				</div>
+			</script>
+		</div>
+
+		<div id="contactList" class="modal fade">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		      	<div class="pull-right">
+			        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<a href="#" class="btn btn-sm btn-default" id="addContactButton" style="margin-right: 10px"><span class="glyphicon glyphicon-plus"></span> New Contact</a>
+				</div>
+
+		        <h4 class="modal-title">All Contacts</h4>
+		      </div>
+
+		      <div class="modal-body" style="max-height:300px; overflow:scroll">
+				<div class="list-group" id="contactsDiv">
+					<script class="template" type="text/x-handlebars-template">
+					  <div data-id="{{id}}" class="list-group-item person"> 
+						<a href="#" class="btn btn-sm btn-danger removeButton pull-right"><span class="glyphicon glyphicon-remove"></span></a>
+					  	{{name}} 
+					  </div>
+					</script>
+				</div>
+		      </div>
+
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<div id="newContact" class="modal fade">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title">New Contact</h4>
+		      </div>
+		      <div class="modal-body">
+				<form role="form" id="newContactForm">
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Name</label>
+				    <input name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+				  </div>
+ -->				</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" id="submitNewContactButton">Save</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+		<div id="newActivity" class="modal fade">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title">New Activity</h4>
+		      </div>
+		      <div class="modal-body">
+				<form role="form" id="newActivityForm">
+				  <div class="form-group">
+				    <label for="exampleInputEmail1">Name</label>
+				    <input name="name" class="form-control" id="exampleInputEmail1" placeholder="Enter name">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleInputPassword1">Description</label>
+				    <input name="description" class="form-control" id="exampleInputPassword1" placeholder="Enter something about this activity">
+				  </div>
+				  <div class="form-group">
+				    <label for="tags">Tags</label>
+				    <input name="tags" type=text class="tags" placeholder="Enter tags">
+				  </div>
+				  <div class="form-group">
+				    <label for="duplicate">DuplicatedFrom</label>
+				    <div id="duplciateFromDiv"></div>
+				  </div>
+				</form>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary" id="submitNewActivityButton">Add</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+	</div>
+</body>
+</html>

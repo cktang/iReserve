@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script src="js/underscore-min.js"></script>
+	<script src="js/backbone-min.js"></script>
+	<script src="js/bootstrap-3.1.1-dist/js/bootstrap.js"></script>
+    <script src="js/firebase.js"></script>
+    <script src="js/backbone-firebase.js"></script>
+    <script src="js/handlebars-v1.3.0.js"></script>
+    <script src="js/json2.js"></script>
+    <script src="js/jquery.tagsinput.js"></script>
+
+    <script src="js/jquery-ui-1.11.0/jquery-ui.js"></script>
+	<link href="js/jquery-ui-1.11.0/jquery-ui.css" rel="stylesheet">
+
+	<link href="js/jquery.tagsinput.css" rel="stylesheet">
+	<link href="js/bootstrap-3.1.1-dist//css/bootstrap.min.css" rel="stylesheet">
+
+	<link href="css/silly.css" rel="stylesheet">
+	<script src="js/backbonemodel.js"></script>
+	<script src="js/sillymodels.js"></script>
+	<script src="js/backbone-listeners.js"></script>
+
+	<script src="pagejs/activity.js"></script>
+
+	<!-- <meta name="viewport" content="width=1024, minimal-ui"/> -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+	<div class="container">
+		<div id="stats">
+			<script class="template" type="text/x-handlebars-template">
+				<h3 id="title"> 
+					<div class="pull-right">
+						<div class="btn-group">
+						  <button type="button" class="btn btn-sm btn-success">{{{ filter people status="going" }}}</button>
+						  <button type="button" class="btn btn-sm btn-default">{{{ filter people status="unknown" }}}</button>
+						  <button type="button" class="btn btn-sm btn-danger">{{{ filter people status="notgoing" }}}</button>
+						  <button type="button" class="btn btn-sm strong">{{{ filter people status="--any--" }}}</button>
+						</div>
+						<a href="#" class="btn btn-sm btn-default" id="editButton"><span class="glyphicon glyphicon-pencil"></span></a>
+					</div>
+					<a href="group.html"><span class="glyphicon glyphicon-chevron-left"></span></a> <span class="name"> {{name}} </span> 
+				</h3>
+				<h6 class=header> {{description}} </h6>
+			</script>
+		</div>
+
+		<div class="list-group" id="peopleList">
+			<script class="template" type="text/x-handlebars-template">
+				<a href="#"  data-id="{{id}}" class="list-group-item activity list-group-item-{{{printStatus this}}}">
+					<h4 class="name list-group-item-heading"> {{name}} </h4>
+					<div> {{remark}} </div>
+					<div class="content list-group-item-text hide full">
+						<div class="pull-right buttonGroup">
+							<div class="btn-group attendanceButtons">
+							    <button type="button" class="btn btn-lg btn-success"><span class="glyphicon glyphicon-ok"></span></button>
+							    <button type="button" class="btn btn-lg btn-default btn-unknown"><span class="glyphicon glyphicon-minus"></span></button>
+								<button type="button" class="btn btn-lg btn-danger"><span class="glyphicon glyphicon-remove"></span></button>
+							</div>	
+							<button type="button" class="reportButton btn btn-lg btn-primary"><span class="glyphicon glyphicon-flag"></span></button>
+						</div>
+					</div>
+				</a>
+			</script>
+		</div>
+
+		<div id="editPersonList" class="modal fade">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title">Who is in this activity</h4>
+		      </div>
+		      <div class="modal-body" style="max-height:300px; padding: 0px; overflow:scroll">
+				<div class="list-group" id="allPeopleList">
+					<script class="template" type="text/x-handlebars-template">
+						<a href="#" data-id="{{id}}" class="list-group-item">
+							<div class="pull-right">
+								<input type=checkbox />
+							</div>
+							{{name}}
+						</a>
+					</script>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" id="editPersonSaveButton" data-dismiss="modal">Save</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+
+	</div>
+</body>
+</html>

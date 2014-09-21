@@ -45,6 +45,7 @@ public class iReserve implements Runnable {
 	public iReserve() throws Exception {
 		logger.info("iReserve()");
 		server = new WebServer(new InetSocketAddress(1234));
+		server.start();
 	}
 	
 	public void playSiren() {
@@ -160,6 +161,8 @@ public class iReserve implements Runnable {
 					if (a.get().isAvaialble()) {
 						String storeName = a.get().getStoreName();
 						logger.info("AVAIABLE: " + storeName);
+						server.broadcast("AVAIABLE: " + storeName);
+						
 						this.register();
 						this.playSiren();
 						
@@ -169,6 +172,11 @@ public class iReserve implements Runnable {
 						//open safari to login
 					} else {
 						logger.info("Now:" + new Date() + " Update:" + formatter.format(a.get().getDate()));
+						server.broadcast("Now:" + new Date() + " Update:" + formatter.format(a.get().getDate()));
+						
+
+						server.broadcast("captcha", "captcha.jpg");
+						server.broadcast("sms", "IP-WSBOCSJE");
 					}					
 				} else {
 					logger.info("Apple site not available");
@@ -190,10 +198,8 @@ public class iReserve implements Runnable {
 			
 			//save captcha
 			HtmlImage image = (HtmlImage) page.getElementById("captcha");
-			image.saveAs(new File("captcha.jpg"));
-			
-			
-			
+			image.saveAs(new File("html/captcha.jpg"));
+			server.broadcast("captcha", "captcha.jpg");
 			
 //			webClient.closeAllWindows();
 			

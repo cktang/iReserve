@@ -1,0 +1,85 @@
+.link:active{
+    -webkit-transform:scale(0.95); 
+    -moz-transform:scale(0.95); 
+    -ms-transform:scale(0.95); 
+    -o-transform:scale(0.95); 
+    transform:scale(0.95); 
+    -webkit-box-shadow:0px 0px 20px #FFF; 
+    -moz-box-shadow:0px 0px 20px #FFF; 
+    -o-box-shadow:0px 0px 20px #FFF; 
+    box-shadow:0px 0px 20px #FFF; 
+}
+
+* {
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+}
+
+body {
+	background-color: #ddd;
+}
+#activities .list-group-item {
+	position: relative;
+}
+
+.list-group-item .buttonGroup {
+	position: absolute;
+	right:0px;
+	top:0px;
+}
+
+.btn, .list-group-item, select {
+	border-radius: 0px;
+	border: 0px;
+}
+
+.list-group-item {
+	border-bottom: 4px solid #ddd;
+}
+
+.modal .list-group-item {
+	border-bottom: 2px solid #ddd;	
+}
+
+.container {
+	padding: 0px;
+}
+
+h1,h2,h3,h4,h5,h6 {
+	padding: 0px;
+	margin: 0px 0px;
+}
+
+.header {
+	padding: 10px;
+}
+
+.strong {
+	font-weight: bold;
+}
+
+.full * {
+	height: 100%;
+}
+
+.btn-unknown, .btn-group .btn-default, .list-group-item-default{
+	background-color: Khaki;
+	color: brown;
+}
+
+.btn-group .btn {
+	max-width: 30px;
+	min-width: 30px;
+	width: 30px;
+	text-align: center;
+	padding-left: 0px;
+	padding-right: 0px;
+}
+
+.attendanceButtons .btn {
+	max-width: 50px;
+	min-width: 50px;
+	width: 50px;
+	text-align: center;
+}

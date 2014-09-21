@@ -12,14 +12,14 @@ class Availability {
 	boolean isAvaialble() {
 		if (updated == 0) return false;
 		
-		for (String model: iReserve.i6Plus) {
+		for (String model: iReserve.i6PlusModels) {
 			if (R485.get(model) || R409.get(model) || R428.get(model)) return true;
-		}
+		} 
 		return false;
 	}
 	
 	String getStoreName() {
-		for (String model: iReserve.i6Plus) {
+		for (String model: iReserve.i6PlusModels) {
 			if (R485.get(model)) return "R485";
 			if (R409.get(model)) return "R409"; 
 			if (R428.get(model)) return "R428";
