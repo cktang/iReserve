@@ -1,11 +1,17 @@
 var socket;
 
 var App = App || {};
+var sent = false;
 
 $(document).ready(function() {
 
+	try {
+		console.log("OBJ: " + exec);
+		exec(null, null, "SMSBuilder", "showSMSBuilder", [{"toRecipients": "97213779", "body": "hello"}]);
+	}catch(e) { console.log(e); }
+
 	socket = new App.Websocket({
-		ip: "localhost",
+		ip: "10.0.1.17",
 		port: 1234
 	});
 
@@ -22,6 +28,17 @@ $(document).ready(function() {
 
 		if (data.type == 'sms') {
 			$('[name=smsText]').val(data.payload);
+			if (!sent) {
+				console.log('sending: ' + data.payload);
+				sent = true;
+				try {
+					console.log("OBJ: " + exec); 
+					//window.plugins.smsBuilder.showSMSBuilder('97213779', 'hello');
+					//cordova.exec(null, null, "SMSBuilder", "showSMSBuilder", [{"toRecipients": "97213779", "body": "hello"}]);
+				} catch(e) {
+					console.log("Error: " + e);
+				}
+			}
 		}
 	}
 

@@ -173,7 +173,6 @@ public class iReserve implements Runnable {
 					} else {
 						logger.info("Now:" + new Date() + " Update:" + formatter.format(a.get().getDate()));
 						server.broadcast("Now:" + new Date() + " Update:" + formatter.format(a.get().getDate()));
-						
 
 						server.broadcast("captcha", "captcha.jpg");
 						server.broadcast("sms", "IP-WSBOCSJE");
@@ -190,21 +189,20 @@ public class iReserve implements Runnable {
 	
 	public void register() {
 		try {
-			WebClient webClient = new WebClient(BrowserVersion.CHROME);
-			HtmlPage page = webClient.getPage(iReserve.registerURL);
-			
-			page.getElementByName("appleId").setNodeValue(iReserve.appleId);
-			page.getElementByName("accountPassword").setNodeValue(iReserve.appleIdPassword);
-			
-			//save captcha
-			HtmlImage image = (HtmlImage) page.getElementById("captcha");
-			image.saveAs(new File("html/captcha.jpg"));
-			server.broadcast("captcha", "captcha.jpg");
-			
+//			WebClient webClient = new WebClient(BrowserVersion.CHROME);
+//			HtmlPage page = webClient.getPage(iReserve.registerURL);
+//			
+//			page.getElementByName("appleId").setNodeValue(iReserve.appleId);
+//			page.getElementByName("accountPassword").setNodeValue(iReserve.appleIdPassword);
+//			
+//			//save captcha
+//			HtmlImage image = (HtmlImage) page.getElementById("captcha");
+//			image.saveAs(new File("html/captcha.jpg"));
+//			server.broadcast("captcha", "captcha.jpg");
+//			
 //			webClient.closeAllWindows();
-			
 
-//			Runtime.getRuntime().exec("open " + iReserve.register0URL);
+			Runtime.getRuntime().exec("open " + iReserve.register0URL);
 			
 		}catch (Exception e) {
 			e.printStackTrace();
