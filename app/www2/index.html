@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="format-detection" content="telephone=no"/>
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height"/>
+  <link rel="stylesheet" type="text/css" href="css/index.css"/>
+  <title>Plugins Demo</title>
+</head>
+<body>
+<div class="app">
+  <h1>Plugins Demo</h1>
+  <div id="deviceready" class="blink">
+    <p class="event listening">Connecting to Device</p>
+    <p class="event received">Device is Ready</p>
+    <div id="pluginsDemoDiv">
+      <p>
+        <button onclick="socialsharingDemo()">SocialSharing *</button>
+        <button onclick="socialsharingFacebookDemo()">SocialSharing Facebook</button>
+        <button onclick="socialsharingSMSDemo()">SocialSharing SMS</button>
+      </p>
+      <p>
+        <button onclick="changeWebViewColor()">Make webview background green (iOS)</button>
+        <button onclick="testAudioPlayer(false)">Test Cordova audio player, 6 MB</button>
+        <button onclick="testAudioPlayer(true)">Test Cordova audio player, 73 MB</button>
+        <!--<button onclick="window.open('http://www.x-services.nl/mindfullness-test-large.mp3', '_self')">Test native audio player (webview)</button>-->
+        <a href="http://www.x-services.nl/mindfullness-test.mp3">Test native audio player (link)</a>
+        <input id="test" name="test" type="text" width="10" placeholder="test"/>
+      </p>
+      <p>
+        <button onclick="calendarDemoAdd()">Calendar-add</button>
+        <button onclick="calendarDemoRemove()">Calendar-del</button>
+      </p>
+      <p>
+        <button onclick="window.plugins.toast.showShortBottom('Hello there!', function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})">Show a toast at the bottom</button>
+      </p>
+      <p>
+        <button onclick="flashlightDemo()">Toggle Flashlight</button>
+      </p>
+      <p>
+        <button onclick="insomniaDemo()">Toggle Insomnia (screen sleep)</button>
+      </p>
+      <p>
+        <button onclick="sslcertificatecheckerDemo(true)">SSL check-ok</button>
+        <button onclick="sslcertificatecheckerDemo(false)">SSL check-fail</button>
+      </p>
+      <p>
+        <button onclick="window.plugins.headsetdetection.detect(function(detected) {alert(detected)})">Headset detected?</button>
+      </p>
+      <p>
+        <button onclick="videoCapturePlusDemo(true,true,5)">VideCapturePlus HQ front 5s</button>
+      </p>
+      <p>
+        <button onclick="backgroundAudioPluginDemo()">Play audio</button>
+        Should continue in the background on iOS
+      </p>
+      <div id="video_meta_container"></div>
+      <div id="video_meta_container2"></div>
+      <div id="video_container"></div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" src="cordova.js"></script>
+
+<!-- plugins -->
+<script src="js/plugins/Flashlight.js"></script>
+
+<!-- plugins demo -->
+<script src="js/socialsharing-plugin-demo.js"></script>
+<script src="js/calendar-plugin-demo.js"></script>
+<script src="js/flashlight-plugin-demo.js"></script>
+<script src="js/sslcertificatechecker-plugin-demo.js"></script>
+<script src="js/webview-background-color-plugin-demo.js"></script>
+<script src="js/videocaptureplus-plugin-demo.js"></script>
+<script src="js/insomnia-plugin-demo.js"></script>
+<script src="js/cordova-media-plugin-demo.js"></script>
+<script src="js/backgroundaudio-plugin-demo.js"></script>
+
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript">
+  app.initialize();
+
+  // this is for the LaunchMyApp plugin
+  function handleOpenURL(url) {
+    setTimeout(function() {
+      alert("LaunchMyApp plugin received url: " + url);
+    }, 0);
+  }
+
+  window.onerror = function(a,b,c) {
+    alert(a + "; " + b + "; " + c);
+  }
+</script>
+</body>
+</html>
